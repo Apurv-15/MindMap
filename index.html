@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mycelium Mind</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-deep: #060705;
+        --fiber-white: #e8e6e1;
+        --biolume-primary: #00ffaa;
+        --biolume-secondary: #00ccff;
+        --interface-blur: blur(12px);
+      }
+      
+      body {
+        margin: 0;
+        background-color: var(--bg-deep);
+        color: var(--fiber-white);
+        font-family: 'Space Grotesk', sans-serif;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Scrollbar styling for side panel */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(232, 230, 225, 0.2);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(232, 230, 225, 0.4);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "d3": "https://esm.sh/d3@^7.9.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
