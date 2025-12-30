@@ -43,9 +43,8 @@ export const SidePanel: React.FC<SidePanelProps> = ({ node, isOpen, onClose, onU
 
   return (
     <div
-      className={`fixed right-0 top-0 h-full w-96 bg-[#060705]/80 backdrop-blur-xl border-l border-[#e8e6e1]/10 z-40 transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}
+      className={`fixed right-0 top-0 h-full w-96 bg-[#060705]/80 backdrop-blur-xl border-l border-[#e8e6e1]/10 z-40 transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
     >
       <div className="flex flex-col h-full p-6 relative">
         {/* Header */}
@@ -64,7 +63,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ node, isOpen, onClose, onU
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto space-y-6 pb-20">
-          
+
           <div className="space-y-2">
             <label className="font-mono text-[10px] text-[#e8e6e1]/40 uppercase tracking-widest">Label</label>
             <input
@@ -85,32 +84,19 @@ export const SidePanel: React.FC<SidePanelProps> = ({ node, isOpen, onClose, onU
           </div>
 
           <div className="space-y-4 pt-4 border-t border-[#e8e6e1]/10">
-             <div className="flex items-center justify-between">
-                <label className="font-mono text-[10px] text-[#e8e6e1]/40 uppercase tracking-widest">Status</label>
-                <select 
-                  value={editForm.metadata?.status || 'active'}
-                  onChange={(e) => handleMetadataChange('status', e.target.value)}
-                  className="bg-[#121411] text-[#00ffaa] text-xs font-mono border border-[#e8e6e1]/10 rounded px-2 py-1 focus:outline-none focus:border-[#00ffaa]"
-                >
-                  <option value="active">ACTIVE</option>
-                  <option value="pending">PENDING</option>
-                  <option value="completed">COMPLETED</option>
-                </select>
-             </div>
-
-             <div className="space-y-2">
-                <label className="font-mono text-[10px] text-[#e8e6e1]/40 uppercase tracking-widest">Tags</label>
-                <div className="flex flex-wrap gap-2">
-                  {editForm.metadata?.tags?.map((tag, i) => (
-                    <span key={i} className="px-2 py-1 bg-[#00ffaa]/10 border border-[#00ffaa]/20 rounded text-[#00ffaa] text-[10px] font-mono uppercase">
-                      {tag}
-                    </span>
-                  ))}
-                  <button className="px-2 py-1 bg-[#e8e6e1]/5 border border-[#e8e6e1]/10 rounded text-[#e8e6e1]/40 text-[10px] font-mono hover:bg-[#e8e6e1]/10 hover:text-[#e8e6e1] transition-colors">
-                    + ADD
-                  </button>
-                </div>
-             </div>
+            <div className="space-y-2">
+              <label className="font-mono text-[10px] text-[#e8e6e1]/40 uppercase tracking-widest">Tags</label>
+              <div className="flex flex-wrap gap-2">
+                {editForm.metadata?.tags?.map((tag, i) => (
+                  <span key={i} className="px-2 py-1 bg-[#00ffaa]/10 border border-[#00ffaa]/20 rounded text-[#00ffaa] text-[10px] font-mono uppercase">
+                    {tag}
+                  </span>
+                ))}
+                <button className="px-2 py-1 bg-[#e8e6e1]/5 border border-[#e8e6e1]/10 rounded text-[#e8e6e1]/40 text-[10px] font-mono hover:bg-[#e8e6e1]/10 hover:text-[#e8e6e1] transition-colors">
+                  + ADD
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className="pt-4 border-t border-[#e8e6e1]/10">
@@ -131,7 +117,7 @@ export const SidePanel: React.FC<SidePanelProps> = ({ node, isOpen, onClose, onU
 
         {/* Footer Actions */}
         <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-[#060705] to-transparent">
-          <button 
+          <button
             onClick={handleSave}
             className="w-full py-3 bg-[#00ffaa] text-[#060705] font-bold uppercase tracking-wider text-xs hover:bg-[#00ccff] transition-colors duration-300 rounded"
           >
