@@ -265,21 +265,6 @@ See `types.ts` for complete TypeScript interfaces:
 - `MindMapNodeData` - Node structure
 - `NodeMetadata` - Metadata schema
 
----
-
-## 🎨 Design Philosophy
-
-**Theme**: Mycelium Network (Bio-Tech/Sci-Fi)
-- **Colors**: 
-  - Background: `#060705` (Deep darkness)
-  - Primary: `#00ffaa` (Bioluminescent green)
-  - Secondary: `#00ccff` (Cyan accents)
-  - Text: `#e8e6e1` (Fiber white)
-- **Fonts**: 
-  - Sans: Space Grotesk (UI elements)
-  - Mono: Space Mono (Technical text)
-
----
 
 ## 🔧 Technical Decisions
 
@@ -339,20 +324,3 @@ Mindmap-UI/
 - [ ] **Collaborative Editing**: Real-time multi-user support
 - [ ] **Backend Integration**: API for persistent storage
 
----
-
-## 📄 License
-
-MIT License - Feel free to use this project as a foundation for your own mind mapping tools.
-
----
-
-## 🙏 Acknowledgments
-
-- **D3.js Community** - For the powerful visualization library
-- **React Team** - For the excellent UI framework
-- **Vite Team** - For blazing-fast build tooling
-
----
-
-**Built with ❤️ using React, TypeScript, and D3.js**

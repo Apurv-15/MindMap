@@ -410,18 +410,6 @@ export default function App() {
         </button>
       </div>
 
-      {/* Stats/Legend */}
-      <div className="fixed bottom-8 left-8 z-40 font-mono text-xs text-[#e8e6e1]/40 pointer-events-none space-y-1">
-        <p>SIGNAL_STRENGTH: 98.2%</p>
-        <p>LATENCY: 12ms</p>
-        <p>NODES_VISIBLE: {(() => {
-          // Simple count of nodes in current view
-          let count = 0;
-          const countNodes = (n: MindMapNodeData) => { count++; if (n.children) n.children.forEach(countNodes); };
-          countNodes(currentRoot);
-          return count;
-        })()}</p>
-      </div>
 
       {/* Docs Modal */}
       {showDocs && (

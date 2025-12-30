@@ -1,53 +1,84 @@
 {
     "id": "root",
-    "label": "Central Spore",
-    "description": "The origin point of the neural mycelium network.",
+    "label": "Vitamins in Human Body",
+    "description": "Essential micronutrients required for various bodily functions, growth, and overall health.",
     "metadata": {
         "type": "root",
         "status": "active",
         "tags": [
-            "origin",
-            "core"
+            "health",
+            "nutrition",
+            "vitamins"
         ],
         "created": "2024-01-01T00:00:00.000Z"
     },
     "children": [
         {
-            "id": "c1",
-            "label": "Neural Plasticity",
-            "description": "Ability of the network to reorganize itself.",
+            "id": "dietary-sources",
+            "label": "Dietary Sources",
+            "description": "Various food sources that provide essential vitamins for the human body.",
             "metadata": {
                 "type": "concept",
                 "status": "active",
                 "tags": [
-                    "brain",
-                    "adaptation"
+                    "nutrition",
+                    "food"
                 ],
                 "created": "2024-01-01T00:00:00.000Z"
             },
             "children": [
                 {
-                    "id": "c1-1",
-                    "label": "Synaptic Pruning",
-                    "description": "Removal of weak connections.",
+                    "id": "fruits-vegetables",
+                    "label": "Fruits & Vegetables",
+                    "description": "Rich sources of vitamins A, C, K, and folate. Include leafy greens, citrus fruits, and colorful vegetables.",
                     "metadata": {
-                        "type": "task",
-                        "status": "pending",
+                        "type": "note",
+                        "status": "active",
                         "tags": [
-                            "optimization"
+                            "plant-based",
+                            "natural"
                         ],
                         "created": "2024-01-01T00:00:00.000Z"
                     }
                 },
                 {
-                    "id": "c1-2",
-                    "label": "Axonal Growth",
-                    "description": "Extension of new pathways.",
+                    "id": "meat-dairy",
+                    "label": "Meat & Dairy",
+                    "description": "Primary sources of vitamin B12, D, and A. Include fish, eggs, milk, and cheese.",
                     "metadata": {
-                        "type": "concept",
+                        "type": "note",
                         "status": "active",
                         "tags": [
-                            "growth"
+                            "animal-based",
+                            "protein"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                },
+                {
+                    "id": "grains-nuts",
+                    "label": "Grains & Nuts",
+                    "description": "Good sources of vitamin E, B vitamins, and minerals. Include whole grains, almonds, and seeds.",
+                    "metadata": {
+                        "type": "note",
+                        "status": "active",
+                        "tags": [
+                            "plant-based",
+                            "fiber"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                },
+                {
+                    "id": "sunlight-fortified",
+                    "label": "Sunlight & Fortified",
+                    "description": "Vitamin D from sunlight exposure and fortified foods like cereals and orange juice.",
+                    "metadata": {
+                        "type": "note",
+                        "status": "active",
+                        "tags": [
+                            "external",
+                            "supplemented"
                         ],
                         "created": "2024-01-01T00:00:00.000Z"
                     }
@@ -55,88 +86,250 @@
             ]
         },
         {
-            "id": "c2",
-            "label": "Substrate Synthesis",
-            "description": "Processing raw data into usable patterns.",
+            "id": "key-bodily-roles",
+            "label": "Key Bodily Roles",
+            "description": "Critical functions vitamins perform in maintaining health and preventing disease.",
             "metadata": {
                 "type": "concept",
                 "status": "active",
                 "tags": [
-                    "data",
-                    "processing"
+                    "function",
+                    "health"
                 ],
                 "created": "2024-01-01T00:00:00.000Z"
             },
             "children": [
                 {
-                    "id": "c2-1",
-                    "label": "Raw Ingestion",
-                    "description": "Intake of unstructured signals.",
+                    "id": "antioxidant",
+                    "label": "Antioxidant Protection",
+                    "description": "Vitamins C and E protect cells from oxidative damage and free radicals.",
                     "metadata": {
                         "type": "task",
-                        "status": "completed",
+                        "status": "active",
                         "tags": [
-                            "input"
+                            "protection",
+                            "cellular"
                         ],
                         "created": "2024-01-01T00:00:00.000Z"
                     }
                 },
                 {
-                    "id": "c2-2",
-                    "label": "Pattern Matching",
-                    "description": "Identifying recurring sequences.",
+                    "id": "bone-health",
+                    "label": "Bone Health",
+                    "description": "Vitamins D and K are essential for calcium absorption and bone mineralization.",
+                    "metadata": {
+                        "type": "task",
+                        "status": "active",
+                        "tags": [
+                            "skeletal",
+                            "calcium"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                },
+                {
+                    "id": "immune-system",
+                    "label": "Immune System Support",
+                    "description": "Vitamins A, C, D, and B6 strengthen immune response and fight infections.",
+                    "metadata": {
+                        "type": "task",
+                        "status": "active",
+                        "tags": [
+                            "immunity",
+                            "defense"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                },
+                {
+                    "id": "energy-metabolism",
+                    "label": "Energy Metabolism",
+                    "description": "B vitamins help convert food into energy and support cellular metabolism.",
+                    "metadata": {
+                        "type": "task",
+                        "status": "active",
+                        "tags": [
+                            "energy",
+                            "cellular"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "health-impact",
+            "label": "Health Impact & Balance",
+            "description": "Understanding the effects of vitamin deficiency and excess on overall health.",
+            "metadata": {
+                "type": "concept",
+                "status": "active",
+                "tags": [
+                    "balance",
+                    "health"
+                ],
+                "created": "2024-01-01T00:00:00.000Z"
+            },
+            "children": [
+                {
+                    "id": "deficiency",
+                    "label": "Deficiency",
+                    "description": "Inadequate vitamin intake can lead to diseases like scurvy (Vitamin C), rickets (Vitamin D), and anemia (B12).",
+                    "metadata": {
+                        "type": "note",
+                        "status": "pending",
+                        "tags": [
+                            "risk",
+                            "disease"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                },
+                {
+                    "id": "excess",
+                    "label": "Excess",
+                    "description": "Overconsumption of vitamins, especially fat-soluble ones, can cause toxicity and adverse effects.",
+                    "metadata": {
+                        "type": "note",
+                        "status": "pending",
+                        "tags": [
+                            "risk",
+                            "toxicity"
+                        ],
+                        "created": "2024-01-01T00:00:00.000Z"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "vitamin-classification",
+            "label": "Vitamin Classification",
+            "description": "Vitamins are classified based on their solubility properties: water-soluble and fat-soluble.",
+            "metadata": {
+                "type": "concept",
+                "status": "active",
+                "tags": [
+                    "classification",
+                    "chemistry"
+                ],
+                "created": "2024-01-01T00:00:00.000Z"
+            },
+            "children": [
+                {
+                    "id": "water-soluble",
+                    "label": "Water-Soluble Vitamins",
+                    "description": "Dissolve in water and are not stored in the body. Need regular intake. Include vitamins B and C.",
                     "metadata": {
                         "type": "concept",
                         "status": "active",
                         "tags": [
-                            "analysis"
+                            "water",
+                            "daily-intake"
                         ],
                         "created": "2024-01-01T00:00:00.000Z"
                     },
                     "children": [
                         {
-                            "id": "c2-2-1",
-                            "label": "Anomaly Detection",
-                            "description": "Flagging irregularities in the stream.",
+                            "id": "vitamin-c",
+                            "label": "Vitamin C",
+                            "description": "Ascorbic acid - Essential for immune function, collagen synthesis, and antioxidant protection.",
                             "metadata": {
                                 "type": "note",
                                 "status": "active",
                                 "tags": [
-                                    "security"
+                                    "antioxidant",
+                                    "immunity"
+                                ],
+                                "created": "2024-01-01T00:00:00.000Z"
+                            }
+                        },
+                        {
+                            "id": "b-complex",
+                            "label": "B-Complex Vitamins",
+                            "description": "Group of 8 vitamins (B1-B12) essential for energy production, brain function, and cell metabolism.",
+                            "metadata": {
+                                "type": "note",
+                                "status": "active",
+                                "tags": [
+                                    "energy",
+                                    "metabolism"
                                 ],
                                 "created": "2024-01-01T00:00:00.000Z"
                             }
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "id": "c3",
-            "label": "Biolume Feedback",
-            "description": "Visual signaling of network health.",
-            "metadata": {
-                "type": "concept",
-                "status": "active",
-                "tags": [
-                    "ui",
-                    "feedback"
-                ],
-                "created": "2024-01-01T00:00:00.000Z"
-            },
-            "children": [
+                },
                 {
-                    "id": "c3-1",
-                    "label": "Pulse Rate",
-                    "description": "Frequency of updates.",
+                    "id": "fat-soluble",
+                    "label": "Fat-Soluble Vitamins",
+                    "description": "Dissolve in fats and can be stored in the body. Include vitamins A, D, E, and K.",
                     "metadata": {
-                        "type": "note",
+                        "type": "concept",
                         "status": "active",
                         "tags": [
-                            "metrics"
+                            "fat",
+                            "storage"
                         ],
                         "created": "2024-01-01T00:00:00.000Z"
-                    }
+                    },
+                    "children": [
+                        {
+                            "id": "vitamin-a",
+                            "label": "Vitamin A",
+                            "description": "Retinol - Critical for vision, immune function, and skin health. Found in liver, carrots, and sweet potatoes.",
+                            "metadata": {
+                                "type": "note",
+                                "status": "active",
+                                "tags": [
+                                    "vision",
+                                    "immunity"
+                                ],
+                                "created": "2024-01-01T00:00:00.000Z"
+                            }
+                        },
+                        {
+                            "id": "vitamin-d",
+                            "label": "Vitamin D",
+                            "description": "Calciferol - Essential for calcium absorption, bone health, and immune modulation. Synthesized from sunlight.",
+                            "metadata": {
+                                "type": "note",
+                                "status": "active",
+                                "tags": [
+                                    "bone",
+                                    "sunlight"
+                                ],
+                                "created": "2024-01-01T00:00:00.000Z"
+                            }
+                        },
+                        {
+                            "id": "vitamin-e",
+                            "label": "Vitamin E",
+                            "description": "Tocopherol - Powerful antioxidant protecting cells from oxidative stress. Found in nuts and seeds.",
+                            "metadata": {
+                                "type": "note",
+                                "status": "active",
+                                "tags": [
+                                    "antioxidant",
+                                    "cellular"
+                                ],
+                                "created": "2024-01-01T00:00:00.000Z"
+                            }
+                        },
+                        {
+                            "id": "vitamin-k",
+                            "label": "Vitamin K",
+                            "description": "Phylloquinone - Essential for blood clotting and bone metabolism. Found in leafy greens.",
+                            "metadata": {
+                                "type": "note",
+                                "status": "active",
+                                "tags": [
+                                    "blood",
+                                    "bone"
+                                ],
+                                "created": "2024-01-01T00:00:00.000Z"
+                            }
+                        }
+                    ]
                 }
             ]
         }
