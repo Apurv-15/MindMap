@@ -50,7 +50,7 @@ export const MindMapCanvas: React.FC<MindMapCanvasProps> = ({
   // Process data into D3 hierarchy
   const root = useMemo(() => {
     const hierarchy = d3.hierarchy(data);
-    
+
     // Set tree layout settings
     // Increasing the separation for better visual spacing
     const treeLayout = d3.tree<MindMapNodeData>()
@@ -58,7 +58,7 @@ export const MindMapCanvas: React.FC<MindMapCanvasProps> = ({
       .separation((a, b) => (a.parent === b.parent ? 1.2 : 2) / (a.depth === 0 ? 1 : 1));
 
     const rootNode = treeLayout(hierarchy);
-    
+
     // Center the root initially
     // We don't shift x/y here, we rely on zoom transform to center
     return rootNode;
@@ -83,37 +83,37 @@ export const MindMapCanvas: React.FC<MindMapCanvasProps> = ({
 
     // Initial center or reset
     if (triggerFitView > 0 || triggerReset > 0) {
-       // Calculate bounding box of the tree
-       let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-       root.descendants().forEach(d => {
-         minX = Math.min(minX, d.y); // Note: d.y is horizontal in horizontal tree
-         maxX = Math.max(maxX, d.y);
-         minY = Math.min(minY, d.x); // d.x is vertical
-         maxY = Math.max(maxY, d.x);
-       });
+      // Calculate bounding box of the tree
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      root.descendants().forEach(d => {
+        minX = Math.min(minX, d.y); // Note: d.y is horizontal in horizontal tree
+        maxX = Math.max(maxX, d.y);
+        minY = Math.min(minY, d.x); // d.x is vertical
+        maxY = Math.max(maxY, d.x);
+      });
 
-       // Add node dimensions (approx)
-       const nodeWidth = 200;
-       const nodeHeight = 80;
-       
-       const width = maxX - minX + nodeWidth * 2;
-       const height = maxY - minY + nodeHeight * 2;
-       
-       const midX = (minX + maxX) / 2;
-       const midY = (minY + maxY) / 2;
-       
-       const scale = Math.min(
-         0.9, 
-         Math.min(dimensions.width / width, dimensions.height / height)
-       );
+      // Add node dimensions (approx)
+      const nodeWidth = 200;
+      const nodeHeight = 80;
 
-       svg.transition().duration(750).call(
-         zoom.transform,
-         d3.zoomIdentity
-           .translate(dimensions.width / 2, dimensions.height / 2)
-           .scale(scale)
-           .translate(-midX, -midY)
-       );
+      const width = maxX - minX + nodeWidth * 2;
+      const height = maxY - minY + nodeHeight * 2;
+
+      const midX = (minX + maxX) / 2;
+      const midY = (minY + maxY) / 2;
+
+      const scale = Math.min(
+        0.9,
+        Math.min(dimensions.width / width, dimensions.height / height)
+      );
+
+      svg.transition().duration(750).call(
+        zoom.transform,
+        d3.zoomIdentity
+          .translate(dimensions.width / 2, dimensions.height / 2)
+          .scale(scale)
+          .translate(-midX, -midY)
+      );
     }
 
   }, [root, dimensions, triggerFitView, triggerReset]);
@@ -137,12 +137,33 @@ export const MindMapCanvas: React.FC<MindMapCanvasProps> = ({
           </filter>
         </defs>
         <g className="zoom-container">
-          
+
           {/* Links */}
           <g className="links">
             {root.links().map((link, i) => {
-               const isSelectedPath = selectedNodeId === link.target.data.id || selectedNodeId === link.source.data.id;
-               return (
+              // Find if this link is part of the path to the selected node
+              // or descending from the selected node
+              const targetNode = link.target;
+              const sourceNode = link.source;
+
+              // Check if target is an ancestor of the selected node (path to root)
+              // traverse up from selected node
+              let isAncestorPath = false;
+              if (selectedNodeId) {
+                const selectedD3Node = root.descendants().find(d => d.data.id === selectedNodeId);
+                if (selectedD3Node) {
+                  const ancestors = selectedD3Node.ancestors();
+                  // If the link's target is in the ancestor list, it is part of the path down to selection
+                  if (ancestors.includes(targetNode)) {
+                    isAncestorPath = true;
+                  }
+                }
+              }
+
+              const isChildPath = sourceNode.data.id === selectedNodeId;
+              const isSelectedPath = isAncestorPath || isChildPath;
+
+              return (
                 <path
                   key={`${link.source.data.id}-${link.target.data.id}`}
                   d={linkGenerator(link) || ''}
@@ -151,7 +172,7 @@ export const MindMapCanvas: React.FC<MindMapCanvasProps> = ({
                   strokeWidth={isSelectedPath ? 2 : 1}
                   strokeOpacity={isSelectedPath ? 0.8 : 0.2}
                   className="transition-all duration-500 ease-out"
-                  style={{ 
+                  style={{
                     filter: isSelectedPath ? 'url(#glow)' : 'none'
                   }}
                 />
@@ -176,78 +197,78 @@ export const MindMapCanvas: React.FC<MindMapCanvasProps> = ({
                   className="overflow-visible"
                 >
                   <div className="relative w-full h-full">
-                    
+
                     {/* Drill Up Button for Root */}
                     {isRoot && canDrillUp && (
-                        <button
-                            onClick={(e) => { e.stopPropagation(); onDrillUp?.(); }}
-                            className="absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1 bg-[#060705] border border-[#00ffaa] text-[#00ffaa] text-[10px] rounded-full hover:bg-[#00ffaa] hover:text-[#060705] transition-colors z-50 shadow-[0_0_15px_rgba(0,255,170,0.3)] backdrop-blur-md cursor-pointer"
-                        >
-                            <Icons.ArrowUp size={12} strokeWidth={3} />
-                            <span className="font-mono font-bold tracking-wider">DRILL UP</span>
-                        </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); onDrillUp?.(); }}
+                        className="absolute -top-10 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1 bg-[#060705] border border-[#00ffaa] text-[#00ffaa] text-[10px] rounded-full hover:bg-[#00ffaa] hover:text-[#060705] transition-colors z-50 shadow-[0_0_15px_rgba(0,255,170,0.3)] backdrop-blur-md cursor-pointer"
+                      >
+                        <Icons.ArrowUp size={12} strokeWidth={3} />
+                        <span className="font-mono font-bold tracking-wider">DRILL UP</span>
+                      </button>
                     )}
 
                     <div
-                        className={`
+                      className={`
                         relative w-full h-full flex flex-col justify-center px-4 py-2
                         border rounded-sm backdrop-blur-md transition-all duration-300
                         group
                         ${isRoot ? 'bg-[#121411]/90 border-[#00ffaa]/50 shadow-[0_0_30px_rgba(0,255,170,0.2)]' : 'bg-[#121411]/60 border-[#e8e6e1]/10 hover:border-[#00ffaa]/50'}
                         ${isSelected ? 'border-[#00ffaa] shadow-[0_0_20px_rgba(0,255,170,0.15)] scale-105' : ''}
                         `}
-                        onClick={(e) => {
+                      onClick={(e) => {
                         e.stopPropagation();
                         onNodeClick(node.data);
-                        }}
-                        onDoubleClick={(e) => {
+                      }}
+                      onDoubleClick={(e) => {
                         e.stopPropagation();
                         onNodeDoubleClick(node.data);
-                        }}
-                        onMouseEnter={(e) => onNodeHover(node.data, { x: e.clientX, y: e.clientY })}
-                        onMouseLeave={() => onNodeHover(null, null)}
+                      }}
+                      onMouseEnter={(e) => onNodeHover(node.data, { x: e.clientX, y: e.clientY })}
+                      onMouseLeave={() => onNodeHover(null, null)}
                     >
-                        {/* Connection Node (Dot) */}
-                        {hasChildren && (
+                      {/* Connection Node (Dot) */}
+                      {hasChildren && (
                         <button
-                            className={`absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center
+                          className={`absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full flex items-center justify-center
                             bg-[#060705] border border-[#00ffaa]/50 text-[#00ffaa] hover:bg-[#00ffaa] hover:text-[#060705] transition-all z-20
                             ${node.data.collapsed ? 'bg-[#00ffaa] text-[#060705] animate-pulse' : ''}
                             `}
-                            onClick={(e) => {
+                          onClick={(e) => {
                             e.stopPropagation();
                             onToggleCollapse(node.data.id);
-                            }}
+                          }}
                         >
-                            {node.data.collapsed ? <span className="text-[10px] font-bold">+</span> : <span className="text-[10px] font-bold">-</span>}
+                          {node.data.collapsed ? <span className="text-[10px] font-bold">+</span> : <span className="text-[10px] font-bold">-</span>}
                         </button>
-                        )}
+                      )}
 
-                        {/* Drill Down Button (Top Right corner) */}
-                        {!isRoot && (
-                            <button
-                                onClick={(e) => { e.stopPropagation(); onNodeDoubleClick(node.data); }}
-                                className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-200 bg-[#060705] border border-[#00ccff] text-[#00ccff] rounded-full p-1 hover:bg-[#00ccff] hover:text-[#060705] scale-75 hover:scale-100 z-50 shadow-[0_0_10px_rgba(0,204,255,0.3)]"
-                                title="Drill Down / Focus"
-                            >
-                                <Icons.ArrowDown size={14} />
-                            </button>
-                        )}
+                      {/* Drill Down Button (Top Right corner) */}
+                      {!isRoot && (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); onNodeDoubleClick(node.data); }}
+                          className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-200 bg-[#060705] border border-[#00ccff] text-[#00ccff] rounded-full p-1 hover:bg-[#00ccff] hover:text-[#060705] scale-75 hover:scale-100 z-50 shadow-[0_0_10px_rgba(0,204,255,0.3)]"
+                          title="Drill Down / Focus"
+                        >
+                          <Icons.ArrowDown size={14} />
+                        </button>
+                      )}
 
-                        <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center justify-between mb-1">
                         <span className="font-mono text-[9px] text-[#00ffaa] uppercase opacity-70">
-                            {node.data.metadata.type}
+                          {node.data.metadata.type}
                         </span>
                         {isSelected && <div className="w-1.5 h-1.5 rounded-full bg-[#00ffaa] animate-ping" />}
-                        </div>
-                        
-                        <h3 className={`font-bold text-[#e8e6e1] truncate ${isRoot ? 'text-lg' : 'text-sm'}`}>
+                      </div>
+
+                      <h3 className={`font-bold text-[#e8e6e1] truncate ${isRoot ? 'text-lg' : 'text-sm'}`}>
                         {node.data.label}
-                        </h3>
-                        
-                        {/* Decorative Corner */}
-                        <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e8e6e1]/20 rounded-tl-sm" />
-                        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#e8e6e1]/20 rounded-br-sm" />
+                      </h3>
+
+                      {/* Decorative Corner */}
+                      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-[#e8e6e1]/20 rounded-tl-sm" />
+                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-[#e8e6e1]/20 rounded-br-sm" />
                     </div>
                   </div>
                 </foreignObject>
