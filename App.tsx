@@ -175,25 +175,29 @@ export default function App() {
   }, [currentRoot.id]);
 
   const handleCollapseAll = useCallback(() => {
-    const collapseRecursively = (node: MindMapNodeData, isRoot: boolean) => {
-      if (!isRoot && node.children && node.children.length > 0) {
+    const collapseRecursively = (node: MindMapNodeData) => {
+      if (node.children && node.children.length > 0) {
         node._children = node.children;
         node.children = undefined;
         node.collapsed = true;
-      }
-
-      // Also ensure deep children are collapsed
-      const targets = node.children || node._children;
-      if (targets) {
-        targets.forEach(child => collapseRecursively(child, false));
+        // Recursively collapse all descendants
+        node._children.forEach(collapseRecursively);
       }
     };
 
     setData(prev => modifyNode(prev, currentRoot.id, (node) => {
-      collapseRecursively(node, true);
+      // Collapse the current root node itself (including its immediate children)
+      if (node.children && node.children.length > 0) {
+        node._children = node.children;
+        node.children = undefined;
+        node.collapsed = true;
+        // Also collapse all nested children
+        node._children.forEach(collapseRecursively);
+      }
     }));
     setFitViewTrigger(n => n + 1);
   }, [currentRoot.id]);
+
 
 
   const handleAddNode = useCallback(() => {
