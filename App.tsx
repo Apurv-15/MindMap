@@ -10,7 +10,28 @@ import { Icons } from './components/Icons';
 const initialData = initialDataRaw as unknown as MindMapNodeData;
 
 export default function App() {
-  const [data, setData] = useState<MindMapNodeData>(initialData);
+  const [data, setData] = useState<MindMapNodeData>(() => {
+    // Deep clone to avoid mutating the original import
+    const d = JSON.parse(JSON.stringify(initialData)) as MindMapNodeData;
+
+    // Recursive helper to collapse nodes
+    const collapseRecursively = (node: MindMapNodeData) => {
+      if (node.children && node.children.length > 0) {
+        node._children = node.children;
+        node.children = undefined;
+        node.collapsed = true;
+        // Continue collapsing deeper levels just in case they get expanded later
+        node._children.forEach(collapseRecursively);
+      }
+    };
+
+    // Collapse all children of the root (preserving level 1 visibility)
+    if (d.children) {
+      d.children.forEach(child => collapseRecursively(child));
+    }
+
+    return d;
+  });
 
   // Sync state with data.json updates (HMR support)
   useEffect(() => {
