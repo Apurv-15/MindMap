@@ -88,6 +88,15 @@ export default function App() {
   }, []);
 
   const handleNodeDoubleClick = useCallback((node: MindMapNodeData) => {
+    // Expand the node we're drilling into if it's collapsed
+    if (node._children && !node.children) {
+      setData(prev => modifyNode(prev, node.id, (n) => {
+        n.children = n._children;
+        n._children = undefined;
+        n.collapsed = false;
+      }));
+    }
+
     // Allow drilling into any node regardless of children (Focus Mode)
     setDrillPath(prev => [...prev, node.id]);
     setFitViewTrigger(n => n + 1); // Auto fit view on drill
@@ -102,10 +111,22 @@ export default function App() {
 
   const handleDrillUp = useCallback(() => {
     if (drillPath.length > 1) {
+      // Get the node we're currently viewing (the one we're drilling up from)
+      const currentNodeId = drillPath[drillPath.length - 1];
+
+      // Expand it in the parent view so user can see where they were
+      setData(prev => modifyNode(prev, currentNodeId, (node) => {
+        if (node._children && !node.children) {
+          node.children = node._children;
+          node._children = undefined;
+          node.collapsed = false;
+        }
+      }));
+
       setDrillPath(prev => prev.slice(0, -1));
       setFitViewTrigger(n => n + 1);
     }
-  }, [drillPath.length]);
+  }, [drillPath]);
 
   const handleBreadcrumbClick = (index: number) => {
     setDrillPath(prev => prev.slice(0, index + 1));
