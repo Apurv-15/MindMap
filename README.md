@@ -2,7 +2,11 @@
 
 A **data-driven**, **interactive mind mapping application** built with React and D3.js. Features a sci-fi aesthetic with advanced visualization capabilities including drill-down navigation, collapsible branches, and real-time node editing.
 
+
 ## 📸 Screenshots
+
+### Interactive Demo
+![Mycelium Mind Demo](./screenshots/demo.webp)
 
 ### Collapsed View
 ![Collapsed View](./screenshots/screenshot-1.png)
