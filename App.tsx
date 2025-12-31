@@ -14,20 +14,25 @@ export default function App() {
     // Deep clone to avoid mutating the original import
     const d = JSON.parse(JSON.stringify(initialData)) as MindMapNodeData;
 
-    // Recursive helper to collapse nodes
+    // Recursive helper to collapse all nodes
     const collapseRecursively = (node: MindMapNodeData) => {
       if (node.children && node.children.length > 0) {
         node._children = node.children;
         node.children = undefined;
         node.collapsed = true;
-        // Continue collapsing deeper levels just in case they get expanded later
+        // Continue collapsing deeper levels
         node._children.forEach(collapseRecursively);
       }
     };
 
-    // Collapse all children of the root (preserving level 1 visibility)
+    // Collapse everything including root's immediate children
+    // This ensures only the root node is visible on initial load
     if (d.children) {
-      d.children.forEach(child => collapseRecursively(child));
+      d._children = d.children;
+      d.children = undefined;
+      d.collapsed = true;
+      // Also collapse all nested children
+      d._children.forEach(collapseRecursively);
     }
 
     return d;
