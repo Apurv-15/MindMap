@@ -321,14 +321,24 @@ export default function App() {
           {/* Drill Group */}
           <button
             onClick={handleDrillDownButton}
-            className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-md transition-colors shadow-lg shadow-cyan-600/20 font-medium text-sm"
+            disabled={!selectedNode}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors shadow-lg font-medium text-sm
+              ${!selectedNode
+                ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                : 'bg-cyan-600 hover:bg-cyan-700 text-white shadow-cyan-600/20'}`}
+            title={!selectedNode ? "Select a node first to drill down" : "Focus on selected node's subtree"}
           >
             <Icons.ArrowDown size={16} />
             <span>Drill Down</span>
           </button>
           <button
             onClick={handleDrillUp}
-            className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-700 text-white rounded-md transition-colors shadow-lg shadow-cyan-600/20 font-medium text-sm"
+            disabled={drillPath.length <= 1}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md transition-colors shadow-lg font-medium text-sm
+              ${drillPath.length <= 1
+                ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                : 'bg-cyan-600 hover:bg-cyan-700 text-white shadow-cyan-600/20'}`}
+            title={drillPath.length <= 1 ? "Already at root level" : "Go back to parent view"}
           >
             <Icons.ArrowUp size={16} />
             <span>Drill Up</span>
