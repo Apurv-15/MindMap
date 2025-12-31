@@ -2,6 +2,8 @@
 
 A **data-driven**, **interactive mind mapping application** built with React and D3.js. Features a sci-fi aesthetic with advanced visualization capabilities including drill-down navigation, collapsible branches, and real-time node editing.
 
+**[🚀 Live Demo](https://mind-map-xi-ten.vercel.app)**
+
 
 ## 📸 Screenshots
 
