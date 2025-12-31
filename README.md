@@ -1,4 +1,4 @@
-# Mycelium Mind - Interactive Mindmap Visualization
+# Mycelium Mind - Vitamins in Human Body Visualization
 
 A **data-driven**, **interactive mind mapping application** built with React and D3.js. Features a sci-fi aesthetic with advanced visualization capabilities including drill-down navigation, collapsible branches, and real-time node editing.
 
